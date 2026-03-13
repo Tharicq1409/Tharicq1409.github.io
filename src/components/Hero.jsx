@@ -1,0 +1,61 @@
+import './Hero.css'
+import profileImg from '../assets/profile.png'
+
+export default function Hero() {
+  return (
+    <section id="about" className="hero">
+      <div className="hero-orb-cyan" />
+      <div className="container hero-container">
+        <div className="hero-content">
+          <p className="hero-greeting">Hello, I&apos;m</p>
+          <h1 className="hero-name">Sheik Mohamed<br />Tharicq P</h1>
+          <p className="hero-role">
+            Oracle Technical &amp; <span className="accent">OIC Consultant</span>
+          </p>
+          <p className="hero-bio">
+            Oracle Integration Cloud professional with <strong>4+ years of experience</strong> in
+            Oracle ERP implementation, support, and technical consulting. Specialized in OIC
+            integrations, Oracle Fusion Cloud (Finance &amp; SCM), BI Publisher reports, and
+            end-to-end inbound/outbound flows between Oracle EBS R12 and Fusion Cloud.
+            Hands-on across OIC, Workato, and Make.com iPaaS platforms.
+          </p>
+          <div className="hero-actions">
+            <a href="#contact" className="btn btn-primary">Get in Touch</a>
+            <a href="#skills" className="btn btn-ghost">View Skills</a>
+          </div>
+          <div className="hero-stats">
+            <div className="stat">
+              <span className="stat-number">4+</span>
+              <span className="stat-label">Years Experience</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat">
+              <span className="stat-number">10+</span>
+              <span className="stat-label">Integrations Built</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat">
+              <span className="stat-number">4+</span>
+              <span className="stat-label">Global Clients</span>
+            </div>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <div className="avatar-ring">
+            <div className="avatar-placeholder">
+              <img src={profileImg} alt="Sheik Mohamed Tharicq" className="avatar-img" />
+            </div>
+          </div>
+          <div className="floating-badge badge-1">
+            <span className="badge-icon">⚡</span>
+            <span>OIC Developer</span>
+          </div>
+          <div className="floating-badge badge-2">
+            <span className="badge-icon">☁️</span>
+            <span>Oracle Fusion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
