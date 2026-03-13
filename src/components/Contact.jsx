@@ -3,17 +3,28 @@ import './Contact.css'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState(null)
+  const [status, setStatus] = useState(null) // null | 'sending' | 'sent' | 'error'
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    // Opens default mail client with pre-filled message
-    const mailto = `mailto:tharicq1409@yahoo.com?subject=Portfolio Contact from ${encodeURIComponent(form.name)}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)}`
-    window.location.href = mailto
-    setStatus('sent')
-    setForm({ name: '', email: '', message: '' })
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setStatus('sent')
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   const contactLinks = [
@@ -109,11 +120,14 @@ export default function Contact() {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary btn-full">
-              Send Message →
+            <button type="submit" className="btn btn-primary btn-full" disabled={status === 'sending'}>
+              {status === 'sending' ? 'Sending...' : 'Send Message →'}
             </button>
             {status === 'sent' && (
-              <p className="form-success">Message opened in your mail client!</p>
+              <p className="form-success">✅ Message sent! I'll get back to you soon.</p>
+            )}
+            {status === 'error' && (
+              <p className="form-error">❌ Something went wrong. Please try again.</p>
             )}
           </form>
         </div>

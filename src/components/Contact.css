@@ -148,6 +148,13 @@ a.contact-link-value:hover { color: var(--indigo); }
   font-weight: 500;
 }
 
+.form-error {
+  font-size: 13px;
+  color: #f87171;
+  text-align: center;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .form-row { grid-template-columns: 1fr; }
