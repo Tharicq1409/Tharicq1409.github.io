@@ -203,17 +203,17 @@
 
 .certs-timeline {
   position: relative;
-  padding-left: 28px;
+  padding-left: 32px;
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-/* Vertical line */
+/* Vertical line — center at 8px from timeline left */
 .certs-timeline::before {
   content: '';
   position: absolute;
-  left: 6px;
+  left: 7px;
   top: 8px;
   bottom: 8px;
   width: 2px;
@@ -238,7 +238,9 @@
 
 .cert-dot {
   position: absolute;
-  left: -25px;
+  /* dot is 12px wide; center = left + 6. We want center = 8px from timeline left.
+     cert-row starts at padding-left(32px), so left = 8 - 32 - 6 = -30px */
+  left: -30px;
   top: 21px;
   width: 12px;
   height: 12px;
