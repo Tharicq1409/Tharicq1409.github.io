@@ -44,7 +44,7 @@ export default function Hero() {
             </div>
             <div className="stat-divider" />
             <div className="stat">
-              <span className="stat-number">4+</span>
+              <span className="stat-number">3+</span>
               <span className="stat-label">Global Clients</span>
             </div>
           </div>
