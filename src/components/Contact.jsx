@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Contact.css'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -27,6 +28,10 @@ export default function Contact() {
     }
   }
 
+  const headerRef = useScrollAnimation()
+  const infoRef = useScrollAnimation()
+  const formRef = useScrollAnimation()
+
   const contactLinks = [
     {
       icon: '✉️',
@@ -51,12 +56,14 @@ export default function Contact() {
   return (
     <section id="contact">
       <div className="container">
-        <p className="section-label">Let&apos;s Talk</p>
-        <h2 className="section-title">Get in Touch</h2>
-        <div className="divider" />
+        <div className="fade-up" ref={headerRef}>
+          <p className="section-label">Let&apos;s Talk</p>
+          <h2 className="section-title">Get in Touch</h2>
+          <div className="divider" />
+        </div>
 
         <div className="contact-grid">
-          <div className="contact-info">
+          <div className="contact-info fade-left" ref={infoRef}>
             <p className="contact-intro">
               Looking for an Oracle Integration specialist? Whether it&apos;s OIC,
               ERP Cloud integrations, or technical consulting — let&apos;s connect
@@ -81,7 +88,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form fade-right" ref={formRef} onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="name">Name</label>
