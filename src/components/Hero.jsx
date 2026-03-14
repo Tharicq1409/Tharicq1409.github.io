@@ -1,14 +1,11 @@
 import './Hero.css'
 import profileImg from '../assets/profile.png'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-import { useMagnetic } from '../hooks/useMagnetic'
 const heroBg = 'https://res.cloudinary.com/dgjie55ky/video/upload/RedbullClip_otkfqy.mp4'
 
 export default function Hero() {
   const contentRef = useScrollAnimation({ threshold: 0.1 })
   const visualRef = useScrollAnimation({ threshold: 0.1 })
-  const btn1Ref = useMagnetic()
-  const btn2Ref = useMagnetic(0.25)
 
   return (
     <section id="about" className="hero">
@@ -32,8 +29,8 @@ export default function Hero() {
             Hands-on across OIC, Workato, and Make.com iPaaS platforms.
           </p>
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-primary" ref={btn1Ref}>Get in Touch</a>
-            <a href="#skills" className="btn btn-ghost" ref={btn2Ref}>View Skills</a>
+            <a href="#contact" className="btn btn-primary">Get in Touch</a>
+            <a href="#skills" className="btn btn-ghost">View Skills</a>
           </div>
           <div className="hero-stats">
             <div className="stat">

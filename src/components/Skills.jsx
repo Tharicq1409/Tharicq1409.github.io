@@ -1,4 +1,5 @@
 import './Skills.css'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const categories = [
   {
@@ -42,6 +43,8 @@ const categories = [
   },
 ]
 
+const tagColors = ['#6366f1','#ec4899','#06b6d4','#f97316','#10b981','#6366f1','#ec4899','#06b6d4','#f97316','#10b981','#6366f1','#ec4899','#06b6d4','#f97316','#10b981','#6366f1','#ec4899','#06b6d4','#f97316','#10b981']
+
 const tools = [
   'Oracle OIC', 'Oracle EBS R12', 'Oracle Fusion Cloud', 'NetSuite', 'OCI',
   'BI Publisher', 'OTBI', 'ESS Jobs', 'SQL', 'PL/SQL',
@@ -59,14 +62,21 @@ const certifications = [
 ]
 
 export default function Skills() {
+  const headerRef = useScrollAnimation()
+  const gridRef = useScrollAnimation()
+  const toolsRef = useScrollAnimation()
+  const certsRef = useScrollAnimation()
+
   return (
     <section id="skills">
       <div className="container">
-        <p className="section-label">What I Know</p>
-        <h2 className="section-title">Skills &amp; Expertise</h2>
-        <div className="divider" />
+        <div ref={headerRef} className="fade-up">
+          <p className="section-label">What I Know</p>
+          <h2 className="section-title">Skills &amp; Expertise</h2>
+          <div className="divider" />
+        </div>
 
-        <div className="skills-grid">
+        <div ref={gridRef} className="skills-grid fade-up">
           {categories.map(cat => (
             <div className="skill-card" key={cat.title} style={{ '--card-color': cat.color }}>
               <div className="skill-card-header">
@@ -82,23 +92,29 @@ export default function Skills() {
           ))}
         </div>
 
-        <div className="tools-section">
+        <div ref={toolsRef} className="tools-section fade-up">
           <p className="tools-label">Technologies &amp; Tools</p>
           <div className="tools-list">
-            {tools.map(t => (
-              <span className="tool-tag" key={t}>{t}</span>
+            {tools.map((t, i) => (
+              <span
+                className="tool-tag"
+                key={t}
+                style={{ '--tag-color': tagColors[i % tagColors.length] }}
+              >{t}</span>
             ))}
           </div>
         </div>
 
-        <div className="certs-section">
+        <div ref={certsRef} className="certs-section fade-up">
           <p className="tools-label">Certifications</p>
-          <div className="certs-list">
-            {certifications.map(c => (
-              <div className="cert-item" key={c.title}>
-                <span className="cert-check">✓</span>
-                <span className="cert-title">{c.title}</span>
-                {c.year && <span className="cert-year">{c.year}</span>}
+          <div className="certs-timeline">
+            {certifications.map((c, i) => (
+              <div className="cert-row" key={c.title}>
+                <div className="cert-dot" />
+                <div className="cert-body">
+                  <span className="cert-title">{c.title}</span>
+                  {c.year && <span className="cert-year">{c.year}</span>}
+                </div>
               </div>
             ))}
           </div>

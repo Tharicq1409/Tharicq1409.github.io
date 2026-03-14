@@ -7,25 +7,37 @@
 #skills::before {
   content: '';
   position: absolute;
-  top: -200px;
-  left: -200px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
-  filter: blur(80px);
+  top: -150px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(6,182,212,0.1) 40%, transparent 70%);
+  filter: blur(90px);
   pointer-events: none;
+  animation: orbDrift1 12s ease-in-out infinite alternate;
 }
 
 #skills::after {
   content: '';
   position: absolute;
-  bottom: -200px;
-  right: -200px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(249,115,22,0.1) 0%, transparent 70%);
-  filter: blur(80px);
+  bottom: -150px;
+  right: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(236,72,153,0.1) 40%, transparent 70%);
+  filter: blur(90px);
   pointer-events: none;
+  animation: orbDrift2 14s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift1 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(60px, 80px); }
+}
+
+@keyframes orbDrift2 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-60px, -80px); }
 }
 
 /* ── Category Cards ── */
@@ -40,17 +52,38 @@
 
 .skill-card {
   background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-top: 3px solid var(--card-color);
   border-radius: var(--radius);
   padding: 28px;
   backdrop-filter: var(--glass-blur);
   transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  /* Glowing gradient border via pseudo-element */
+  isolation: isolate;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--card-color), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.skill-card:hover::before {
+  opacity: 1;
 }
 
 .skill-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  box-shadow: 0 0 32px color-mix(in srgb, var(--card-color) 25%, transparent), 0 24px 48px rgba(0,0,0,0.3);
 }
 
 .skill-card-header {
@@ -142,23 +175,24 @@
 .tool-tag {
   padding: 7px 16px;
   border-radius: 100px;
-  border: 1px solid var(--glass-border);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 30%, transparent);
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--bg-card);
+  color: color-mix(in srgb, var(--tag-color) 80%, #fff);
+  background: color-mix(in srgb, var(--tag-color) 10%, transparent);
   backdrop-filter: var(--glass-blur);
   transition: all var(--transition);
 }
 
 .tool-tag:hover {
-  border-color: var(--indigo);
+  border-color: var(--tag-color);
   color: #fff;
-  background: rgba(99,102,241,0.15);
+  background: color-mix(in srgb, var(--tag-color) 22%, transparent);
   transform: translateY(-2px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--tag-color) 30%, transparent);
 }
 
-/* ── Certifications ── */
+/* ── Certifications Timeline ── */
 .certs-section {
   border-top: 1px solid var(--glass-border);
   padding-top: 48px;
@@ -167,50 +201,72 @@
   z-index: 1;
 }
 
-.certs-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.certs-timeline {
+  position: relative;
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.cert-item {
+/* Vertical line */
+.certs-timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, #6366f1, #ec4899, #06b6d4, #f97316, #10b981, #6366f1);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.cert-row {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 16px 18px;
-  backdrop-filter: var(--glass-blur);
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  position: relative;
   transition: all var(--transition);
 }
 
-.cert-item:hover {
-  border-color: rgba(99,102,241,0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(99,102,241,0.12);
-}
+.cert-row:last-child { border-bottom: none; }
 
-.cert-check {
-  width: 22px;
-  height: 22px;
+.cert-row:hover .cert-title { color: var(--text-primary); }
+
+.cert-dot {
+  position: absolute;
+  left: -25px;
+  top: 21px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: #fff;
+  box-shadow: 0 0 8px rgba(99,102,241,0.6);
   flex-shrink: 0;
-  margin-top: 1px;
+  transition: box-shadow var(--transition);
+}
+
+.cert-row:hover .cert-dot {
+  box-shadow: 0 0 14px rgba(99,102,241,0.9);
+}
+
+.cert-body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 1;
 }
 
 .cert-title {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--text-secondary);
   line-height: 1.5;
   flex: 1;
+  transition: color var(--transition);
 }
 
 .cert-year {
@@ -221,12 +277,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   flex-shrink: 0;
-  align-self: flex-start;
+  white-space: nowrap;
 }
 
 @media (max-width: 900px) {
   .skills-grid { grid-template-columns: 1fr; }
-  .certs-list { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {

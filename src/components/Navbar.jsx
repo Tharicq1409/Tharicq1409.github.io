@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './Navbar.css'
-import { useMagnetic } from '../hooks/useMagnetic'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -11,8 +10,6 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  const ctaRef = useMagnetic(0.3)
 
   const links = [
     { label: 'About', href: '#about' },
@@ -32,7 +29,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="#contact" className="nav-cta" ref={ctaRef}>Hire Me</a>
+        <a href="#contact" className="nav-cta">Hire Me</a>
         <button
           className={`hamburger ${menuOpen ? 'active' : ''}`}
           onClick={() => setMenuOpen(o => !o)}
