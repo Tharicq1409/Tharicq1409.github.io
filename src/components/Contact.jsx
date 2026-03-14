@@ -121,7 +121,7 @@ export default function Contact() {
                 id="message"
                 name="message"
                 rows={5}
-                placeholder="Tell me about your project..."
+                placeholder="Send me a message..."
                 value={form.message}
                 onChange={handleChange}
                 required
