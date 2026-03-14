@@ -1,9 +1,14 @@
 import './Hero.css'
 import profileImg from '../assets/profile.png'
+const heroBg = 'https://res.cloudinary.com/dgjie55ky/video/upload/RedbullClip_otkfqy.mp4'
 
 export default function Hero() {
   return (
     <section id="about" className="hero">
+      <video className="hero-video" autoPlay muted loop playsInline>
+        <source src={heroBg} type="video/mp4" />
+      </video>
+      <div className="hero-video-overlay" />
       <div className="hero-orb-cyan" />
       <div className="container hero-container">
         <div className="hero-content">

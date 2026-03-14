@@ -7,6 +7,29 @@
   overflow: hidden;
 }
 
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 5, 15, 0.88) 0%,
+    rgba(7, 5, 15, 0.80) 50%,
+    rgba(7, 5, 15, 0.92) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
 .hero::before {
   content: '';
   position: absolute;
@@ -76,7 +99,7 @@
   font-size: clamp(16px, 2vw, 21px);
   font-weight: 600;
   margin-bottom: 24px;
-  color: var(--text-secondary);
+  color: #e2e8f0;
 }
 
 .hero-role .accent {
@@ -88,7 +111,7 @@
 
 .hero-bio {
   font-size: 15px;
-  color: var(--text-secondary);
+  color: #cbd5e1;
   line-height: 1.8;
   max-width: 480px;
   margin-bottom: 36px;
