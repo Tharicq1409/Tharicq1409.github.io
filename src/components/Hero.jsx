@@ -17,7 +17,7 @@ export default function Hero() {
       <div className="container hero-container">
         <div className="hero-content fade-up" ref={contentRef}>
           <p className="hero-greeting">Hello, I&apos;m</p>
-          <h1 className="hero-name">Sheik Mohamed<br />Tharicq P</h1>
+          <h1 className="hero-name">Sheik Mohamed<br />Tharicq</h1>
           <p className="hero-role">
             Oracle Technical &amp; <span className="accent">OIC Consultant</span>
           </p>
