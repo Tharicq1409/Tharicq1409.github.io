@@ -44,10 +44,11 @@ export default async function handler(req, res) {
       const catMatches = [...block.matchAll(/<category><!\[CDATA\[([\s\S]*?)\]\]><\/category>/g)]
       const tags = catMatches.slice(0, 3).map(m => m[1].trim())
 
-      // Read time from description word count
+      // Read time from full article content (content:encoded), fallback to description
+      const contentMatch = block.match(/<content:encoded><!\[CDATA\[([\s\S]*?)\]\]><\/content:encoded>/)
       const descMatch = block.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/)
-      const descHtml = descMatch ? descMatch[1] : ''
-      const text = descHtml.replace(/<[^>]+>/g, '')
+      const fullHtml = contentMatch ? contentMatch[1] : (descMatch ? descMatch[1] : '')
+      const text = fullHtml.replace(/<[^>]+>/g, '')
       const wordCount = text.trim().split(/\s+/).filter(Boolean).length
       const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
