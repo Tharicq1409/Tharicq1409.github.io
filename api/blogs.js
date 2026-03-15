@@ -3,8 +3,13 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET')
 
   try {
-    const response = await fetch('https://medium.com/feed/@tharicq1409')
-    if (!response.ok) throw new Error('Failed to fetch Medium feed')
+    const response = await fetch('https://medium.com/feed/@tharicq1409', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; portfolio-blog-fetcher/1.0)',
+        'Accept': 'application/rss+xml, application/xml, text/xml'
+      }
+    })
+    if (!response.ok) throw new Error(`Medium feed returned ${response.status}`)
     const xml = await response.text()
 
     const items = []

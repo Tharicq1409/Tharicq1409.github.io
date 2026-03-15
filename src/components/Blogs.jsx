@@ -91,7 +91,7 @@ export default function Blogs() {
           </div>
         )}
 
-        <div className="blogs-cta fade-up">
+        <div className="blogs-cta">
           <a href="https://medium.com/@tharicq1409" target="_blank" rel="noreferrer" className="btn-outline">
             View All Posts on Medium →
           </a>
