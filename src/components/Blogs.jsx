@@ -59,7 +59,7 @@ export default function Blogs() {
                 href={post.link}
                 target="_blank"
                 rel="noreferrer"
-                className="blog-card fade-up"
+                className="blog-card"
               >
                 <div className="blog-card-thumb">
                   {post.thumbnail
