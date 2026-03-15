@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Skills from './components/Skills'
+import Blogs from './components/Blogs'
 import Contact from './components/Contact'
 import Cursor from './components/Cursor'
 import './App.css'
@@ -13,6 +14,7 @@ function App() {
       <main>
         <Hero />
         <Skills />
+        <Blogs />
         <Contact />
       </main>
       <footer className="footer">
@@ -26,7 +28,7 @@ function App() {
           <div className="footer-links">
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
-            <a href="https://medium.com/@tharicq1409" target="_blank" rel="noreferrer">Blog</a>
+            <a href="#blog">Blog</a>
             <a href="#contact">Contact</a>
           </div>
 

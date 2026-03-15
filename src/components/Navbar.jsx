@@ -14,7 +14,7 @@ export default function Navbar() {
   const links = [
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
-    { label: 'Blog', href: 'https://medium.com/@tharicq1409', external: true },
+    { label: 'Blog', href: '#blog' },
     { label: 'Contact', href: '#contact' },
   ]
 
