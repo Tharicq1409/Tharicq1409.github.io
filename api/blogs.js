@@ -35,9 +35,10 @@ export default async function handler(req, res) {
           })
         : ''
 
-      // Thumbnail from media:content
-      const thumbMatch = block.match(/<media:content[^>]+url="([^"]+)"/)
-      const thumbnail = thumbMatch ? thumbMatch[1] : null
+      // Thumbnail — try media:content first, then CDN images in content
+      const mediaMatch = block.match(/<media:content[^>]+url="([^"]+)"/)
+      const cdnMatch = block.match(/https:\/\/cdn-images[^"'\s]+\.(?:png|jpg|jpeg|webp)/)
+      const thumbnail = mediaMatch ? mediaMatch[1] : cdnMatch ? cdnMatch[0] : null
 
       // Categories / tags
       const catMatches = [...block.matchAll(/<category><!\[CDATA\[([\s\S]*?)\]\]><\/category>/g)]
