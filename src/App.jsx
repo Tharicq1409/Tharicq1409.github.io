@@ -1,14 +1,21 @@
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Skills from './components/Skills'
 import Blogs from './components/Blogs'
 import Contact from './components/Contact'
 import Cursor from './components/Cursor'
+import Loader from './components/Loader'
+import ScrollProgress from './components/ScrollProgress'
 import './App.css'
 
 function App() {
+  const [loaded, setLoaded] = useState(false)
+
   return (
     <>
+      {!loaded && <Loader onDone={() => setLoaded(true)} />}
+      <ScrollProgress />
       <Cursor />
       <Navbar />
       <main>
